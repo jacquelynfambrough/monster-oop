@@ -1,0 +1,104 @@
+class Ingestible
+  # creates instance variables,
+  # and a getter and setter for each - thanks ruby
+  attr_accessor :is_safe_to_eat, :is_spicy
+  attr_accessor :name, :is_tasty
+
+  # class variable
+  @@death_toll = 0
+
+  # define class method getter for class variable
+  def self.death_toll
+    @@death_toll
+  end
+
+  # define class method to reset death toll
+  def self.death_reset
+    @@death_toll = 0
+  end
+
+  # instance method to eat thing
+  def eat_this
+    puts "You eat the #{@name}."
+    if !@is_safe_to_eat
+      puts "You die."
+      @@death_toll += 1
+    end
+  end
+
+  # initialize is called by .new
+  def initialize(safe_to_eat, is_tasty, food_name="food?")  # special instance method for ruby class
+    @is_safe_to_eat = safe_to_eat
+    # set an initial value for an instance variable
+    @is_spicy = false
+    @name = food_name
+    self.eat_this
+  end
+end
+
+puts "initial death toll"
+p Ingestible.death_toll
+
+burger = Ingestible.new(true, true, "burger")
+p burger
+
+drugs = Ingestible.new(false, false, "drugs")
+p drugs
+
+# 10.times do
+#   drugs.eat_this
+# end
+
+
+puts " death toll after drugs"
+p Ingestible.death_toll
+
+puts "jk"
+Ingestible.death_reset
+puts " death toll after reset"
+p Ingestible.death_toll
+
+
+
+
+# pre-cleanup
+# # puts "ingestible!"
+# class Ingestible
+#   # everything in here belongs to the class
+#   # instance variable with getter and settter - thanks ruby
+#   attr_accessor :is_safe_to_eat, :is_spicy, :is_tasty, :name
+#
+#   # instance method getter for @is_safe_to_eat
+#   # def is_safe_to_eat
+#   #   @is_safe_to_eat
+#   # end
+#   # attr_reader :is_safe_to_eat
+#
+#   # instance method setter
+#   # def is_safe_to_eat= bool_safe
+#   #   @is_safe_to_eat = bool_safe
+#   # end
+#   # attr_writer :is_safe_to_eat
+#
+#   # initialize is called by .new
+#   def initialize(safe_to_eat, food_name="food?")  # special instance method for ruby class
+#     # set an initial value for an instance variable
+#     @is_safe_to_eat = safe_to_eat
+#     @name = food_name
+#     # puts "safe to eat in initialize? #{@is_safe_to_eat.to_s}"
+#   end
+# end
+
+# create an instance with new
+# yo check out keyword arguments for messing with arg order
+# burger = Ingestible.new(true, "burger")
+# p "burger safe? #{burger.is_safe_to_eat}"
+# burger.is_safe_to_eat = false
+# p "buger safe now? #{burger.is_safe_to_eat}"
+# burger.is_spicy = true
+# p burger
+# p burger.is_tasty
+#
+# drugs = Ingestible.new(false)
+# p "drugs safe? #{drugs.is_safe_to_eat}"
+# p drugs
